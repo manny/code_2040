@@ -61,9 +61,8 @@ object WordCount{
         incrementCount = false
       }
     }
-    sortWords(wordList, concordanceList)
+    outputConcordance(sortWords(wordList, concordanceList))
   }
-    
 
   /*Helper functions that help clean up parseText
    */
@@ -93,13 +92,13 @@ object WordCount{
   /*sortWords takes the parrallel ArrayBuffers built by parseText,
    * then combines and sorts them to pass along to the printing function
    */
-  def sortWords(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]){
+  def sortWords(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]) : Array[String] = {
     for(i <- 0 until wordList.length){
       wordList(i) = wordList(i) + " " + formatEntry(concordanceList(i))
     }
     val sortedList = wordList.toArray
     scala.util.Sorting.quickSort(sortedList)
-    outputConcordance(sortedList)
+    sortedList
 
   }
   /*formatEntry takes in an ArrayBuffer of a words numerical data
@@ -127,5 +126,4 @@ object WordCount{
       println("")
     }
   }
-
 }
