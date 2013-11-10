@@ -38,13 +38,13 @@ object WordCount{
         incrementCount = true
       }else if (wordCheck(word)){
 
-        if(word.endsWith(".") || word.endsWith("?") || word.endsWith("!")){
+        if (word.endsWith(".") || word.endsWith("?") || word.endsWith("!")){
           if(endOfSentence(word)){
             word = word.substring(0, word.length-1)
             incrementCount = true
           }
         }
-        if(wordList.contains(word)){
+        if (wordList.contains(word)){
           concordanceList(wordList.indexOf(word))(0)+=1
           concordanceList(wordList.indexOf(word))+=sentenceCount
         
@@ -56,7 +56,7 @@ object WordCount{
         }
       }
 
-      if(incrementCount){
+      if (incrementCount){
         sentenceCount+=1
         incrementCount = false
       }
@@ -93,7 +93,7 @@ object WordCount{
    * then combines and sorts them to pass along to the printing function
    */
   def sortWords(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]) : Array[String] = {
-    for(i <- 0 until wordList.length){
+    for (i <- 0 until wordList.length){
       wordList(i) = wordList(i) + " " + formatEntry(concordanceList(i))
     }
     val sortedList = wordList.toArray
@@ -108,7 +108,7 @@ object WordCount{
   def formatEntry(concordanceEntry: ArrayBuffer[Int]) : String = {
     var i = 1
     var outputString = "{" + concordanceEntry(0).toString()+ ":"
-    for(i <- 1 until concordanceEntry.length){
+    for (i <- 1 until concordanceEntry.length){
       outputString = outputString + concordanceEntry(i).toString() + ","
     }
     outputString.substring(0, outputString.length-1) + "}"
@@ -121,7 +121,7 @@ object WordCount{
   def outputConcordance(finalConcordance: Array[String]){ 
     println("")
     var i = 0
-    for(i <- 0 until finalConcordance.length){
+    for (i <- 0 until finalConcordance.length){
       println(finalConcordance(i))
       println("")
     }
