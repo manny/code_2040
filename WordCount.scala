@@ -53,11 +53,11 @@ object WordCount{
         incrementCount = false
       }
     }
-    println(wordList.toString)
-    println(concordanceList.toString)
+    //println(wordList.toString)
+    //println(concordanceList.toString)
 
     println("finished parsing")
-    outputConcordence(wordList, concordanceList)
+    sortWords(wordList, concordanceList)
   }
   
   def endOfSentence(word: String) : Boolean = {
@@ -72,11 +72,21 @@ object WordCount{
     (word.equals(".") || word.equals("?") || word.equals("!"))
   }
 
-  def outputConcordence(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]){ 
-    var i = 0
+  def sortWords(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]){
     for(i <- 0 until wordList.length){
       wordList(i) = wordList(i) + " " + formatEntry(concordanceList(i))
-      println(wordList(i))
+    }
+    //wordList.toArray
+    val sortedList = wordList.toArray
+    scala.util.Sorting.quickSort(sortedList)
+    outputConcordence(sortedList)
+
+  }
+
+  def outputConcordence(finalConcordance: Array[String]){ 
+    var i = 0
+    for(i <- 0 until finalConcordance.length){
+      println(finalConcordance(i))
       println("")
     }
   }
