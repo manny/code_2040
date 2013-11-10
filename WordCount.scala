@@ -75,11 +75,19 @@ object WordCount{
   def outputConcordence(wordList: ArrayBuffer[String], concordanceList: ArrayBuffer[ArrayBuffer[Int]]){ 
     var i = 0
     for(i <- 0 until wordList.length){
-      println("word: " + wordList(i))
+      wordList(i) = wordList(i) + " " + formatEntry(concordanceList(i))
+      println(wordList(i))
+      println("")
     }
   }
 
-  def formatEntry(concordanceEntry: ArrayBuffer[Int]){
-    
+  def formatEntry(concordanceEntry: ArrayBuffer[Int]) : String = {
+    var i = 1
+    var outputString = "{" + concordanceEntry(0).toString()+ ":"
+    for(i <- 1 until concordanceEntry.length){
+      outputString = outputString + concordanceEntry(i).toString() + ", "
+    }
+    outputString = outputString.trim()
+    outputString.substring(0, outputString.length-1) + "}"
   }
 }
